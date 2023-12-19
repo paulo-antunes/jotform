@@ -2775,11 +2775,80 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"heading","qid":"1","text":"Consulta
   <script>
     JotForm.poweredByText = "Powered by Jotform";
   </script><input type="hidden" class="simple_spc" id="simple_spc" name="simple_spc" value="232956804435058" />
-  <script type="text/javascript">
+  
+<script type="text/javascript">
     var all_spc = document.querySelectorAll("form[id='232956804435058'] .si" + "mple" + "_spc");
     for (var i = 0; i < all_spc.length; i++)
     {
       all_spc[i].value = "232956804435058-232956804435058";
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+const sheetsAPIUrl = 'https://sheets.googleapis.com/v4/spreadsheets/1Wx7u-Gv6a9_MuNL9T9yEPL6igKn4n6Xeagsd60o5Sls/values/Fields!A1:A?key=AIzaSyBNXO_V7PRQ-dkaW2gdYDDbKr7_TOnyRmc';
+
+
+
+
+
+
+const roomIds = ['input_15', 'input_35', 'input_70'];
+
+
+fetch(sheetsAPIUrl)
+    .then(response => response.json())
+    .then(data => {
+      
+        if (Array.isArray(data.values) && data.values.length > 0) {
+          
+            data.values.forEach(value => {
+
+		
+		roomIds.forEach(function(dropdownId) {
+			
+        		let option = document.createElement("option");
+        		option.value = value[0];
+        		option.text = value[0];
+        
+        		const dropdown = document.getElementById(dropdownId);
+        		dropdown.appendChild(option);
+
+		})
+
+
+
+
+            });
+        } else {
+            alert('No data available.');
+        }
+    })
+    .catch(error => console.error('Error fetching data:', error));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </script>
 </form><script type="text/javascript">JotForm.ownerView=true;</script><script type="text/javascript">JotForm.isNewSACL=true;</script>
