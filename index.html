@@ -461,7 +461,8 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"heading","qid":"1","text":"Consulta
 
 
 
-const sheetsAPIUrl = 'https://sheets.googleapis.com/v4/spreadsheets/1Wx7u-Gv6a9_MuNL9T9yEPL6igKn4n6Xeagsd60o5Sls/values/Fields!A1:A?key=AIzaSyBNXO_V7PRQ-dkaW2gdYDDbKr7_TOnyRmc';
+const RoomUrl = 'https://sheets.googleapis.com/v4/spreadsheets/1Wx7u-Gv6a9_MuNL9T9yEPL6igKn4n6Xeagsd60o5Sls/values/Fields!A1:A?key=AIzaSyBNXO_V7PRQ-dkaW2gdYDDbKr7_TOnyRmc';
+const AdditionUrl = 'https://sheets.googleapis.com/v4/spreadsheets/1Wx7u-Gv6a9_MuNL9T9yEPL6igKn4n6Xeagsd60o5Sls/values/Fields!B1:B?key=AIzaSyBNXO_V7PRQ-dkaW2gdYDDbKr7_TOnyRmc';
 
 
 
@@ -469,9 +470,12 @@ const sheetsAPIUrl = 'https://sheets.googleapis.com/v4/spreadsheets/1Wx7u-Gv6a9_
 
 
 const roomIds = ['input_15', 'input_35', 'input_70'];
+const ecdIds = ['input_8','input_9','input_10','input_20','input_21','input_22','input_23','input_28','input_29','input_30','input_38','input_40','input_42','input_44','input_46','input_48','input_50','input_52','input_54','input_56','input_67'];
 
 
-fetch(sheetsAPIUrl)
+
+
+fetch(RoomUrl)
     .then(response => response.json())
     .then(data => {
       
@@ -505,6 +509,37 @@ fetch(sheetsAPIUrl)
 
 
 
+
+
+fetch(AdditionUrl)
+    .then(response => response.json())
+    .then(data => {
+      
+        if (Array.isArray(data.values) && data.values.length > 0) {
+          
+            data.values.forEach(value => {
+
+		
+		ecdIds.forEach(function(dropdownId) {
+			
+        		let option = document.createElement("option");
+        		option.value = value[0];
+        		option.text = value[0];
+        
+        		const dropdown = document.getElementById(dropdownId);
+        		dropdown.appendChild(option);
+
+		})
+
+
+
+
+            });
+        } else {
+            alert('No data available.');
+        }
+    })
+    .catch(error => console.error('Error fetching data:', error));
 
 
 
